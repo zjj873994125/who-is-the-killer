@@ -2070,6 +2070,12 @@ button:focus-visible,
   }
 }
 
+.replay-phase-steps {
+  border: 1px solid var(--case-border);
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
 .replay-content {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -2114,6 +2120,10 @@ button:focus-visible,
   color: #e9eff0;
   font-family: "SFMono-Regular", Consolas, monospace;
   will-change: transform;
+}
+
+.evidence-selection-panel {
+  min-width: 0;
 }
 
 .candidate-list {
@@ -2185,11 +2195,78 @@ button:focus-visible,
   }
 }
 
+.reasoning-panel {
+  display: grid;
+  gap: 14px;
+  min-height: 300px;
+  padding: 18px;
+  border: 1px solid var(--case-border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.reasoning-question-card {
+  display: grid;
+  gap: 12px;
+}
+
+.reasoning-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.35;
+  }
+}
+
+.reasoning-options {
+  display: grid;
+  gap: 10px;
+
+  .el-radio {
+    width: 100%;
+    height: auto;
+    min-height: 48px;
+    margin-right: 0;
+    padding: 10px 12px;
+    white-space: normal;
+  }
+
+  .el-radio__label {
+    line-height: 1.45;
+    white-space: normal;
+  }
+}
+
 .replay-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
   justify-content: space-between;
+}
+
+.replay-back-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--case-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--case-ink);
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+
+  &:hover {
+    border-color: #9aa8b4;
+    background: #f8fafc;
+  }
 }
 
 .result-message {
@@ -2426,6 +2503,30 @@ button:focus-visible,
     color: #4c1014;
     font-size: 17px;
     line-height: 1.85;
+  }
+
+  .el-button {
+    margin-top: 16px;
+  }
+}
+
+.full-story-dialog {
+  .el-dialog__body {
+    max-height: min(68dvh, 680px);
+    overflow-y: auto;
+  }
+}
+
+.full-story-body {
+  display: grid;
+  gap: 16px;
+
+  p {
+    margin: 0;
+    color: #26323c;
+    font-size: 15px;
+    line-height: 1.9;
+    text-indent: 2em;
   }
 }
 

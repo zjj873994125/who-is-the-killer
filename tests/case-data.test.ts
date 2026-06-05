@@ -51,6 +51,42 @@ describe('case data', () => {
     );
   });
 
+  it('defines a reasoning quiz after the first-chapter evidence selection', () => {
+    const replay = replayQuestions['replay-chapter-1'];
+    const weakOptionPatterns = [
+      '确实有鬼',
+      '一定有人',
+      '一定是错',
+      '可以结案',
+      '没有调查价值',
+      '只可能',
+    ];
+
+    expect(replay.reasoningQuestions).toHaveLength(4);
+    expect(replay.reasoningQuestions.map((question) => question.id)).toEqual([
+      'time-window',
+      'run-mode',
+      'monitor-gap',
+      'chapter-conclusion',
+    ]);
+
+    for (const question of replay.reasoningQuestions) {
+      expect(question.options).toHaveLength(4);
+      expect(question.options.map((option) => option.id)).toContain(
+        question.correctOptionId,
+      );
+      expect(question.failureHint.length).toBeGreaterThan(10);
+      expect(question.successFeedback.length).toBeGreaterThan(10);
+
+      for (const option of question.options) {
+        expect(option.label.length).toBeGreaterThan(24);
+        for (const pattern of weakOptionPatterns) {
+          expect(option.label).not.toContain(pattern);
+        }
+      }
+    }
+  });
+
   it('expands the first chapter to fifteen searchable clues without changing the replay answer', () => {
     const firstChapter = chapters.find((chapter) => chapter.id === 'chapter-1');
     const firstChapterArchiveEntries = archiveSearchEntries.filter(
@@ -162,6 +198,8 @@ describe('case data', () => {
     const storyImageIds = story.images.map((image) => image.id);
 
     expect(story.title).toContain('第一章');
+    expect(story.fullStory.length).toBeGreaterThanOrEqual(5);
+    expect(story.fullStory.every((paragraph) => paragraph.length > 40)).toBe(true);
     expect(story.images.length).toBeGreaterThanOrEqual(5);
     expect(story.beats.length).toBeGreaterThanOrEqual(5);
 

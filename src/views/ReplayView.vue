@@ -68,7 +68,8 @@ const ready = computed(() =>
             <el-steps direction="vertical" :active="ready ? 2 : 1">
               <el-step title="现场观察" description="在电梯现场点击可疑点，记录异常。" />
               <el-step title="档案检索" description="检索并归档第一章全部 15 条线索。" />
-              <el-step title="验证矛盾" description="系统播放电梯运行复盘。" />
+              <el-step title="核心证据" description="从 15 条线索中筛出 3 条关键证据。" />
+              <el-step title="推理作答" description="完成复盘题后播放电梯运行复盘。" />
             </el-steps>
           </el-card>
         </el-col>
@@ -78,11 +79,11 @@ const ready = computed(() =>
         v-if="state.solvedReplayQuestionIds.includes(question.id)"
         icon="success"
         title="第一章复盘完成"
-        sub-title="第二章入口已解锁，可进入后续档案占位。"
+        sub-title="故事区已解锁。去故事区查看第一章完整结案故事。"
       >
         <template #extra>
-          <el-button type="danger" @click="router.push('/locked')">
-            查看第二章占位
+          <el-button type="danger" @click="router.push('/story')">
+            进入故事区
           </el-button>
         </template>
       </el-result>

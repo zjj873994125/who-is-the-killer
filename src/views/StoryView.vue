@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { DocumentChecked, Location } from '@element-plus/icons-vue';
 import {
@@ -17,6 +17,7 @@ import storyTeamResolutionUrl from '../assets/story-team-resolution.png';
 const router = useRouter();
 const { state } = useGameContext();
 const story = chapterResolutionStories['chapter-1'];
+const fullStoryVisible = ref(false);
 
 const hasSolvedChapterOne = computed(() =>
   state.value.solvedReplayQuestionIds.includes('replay-chapter-1'),
@@ -134,7 +135,33 @@ function evidenceTitles(evidenceIds: string[]) {
       <el-card shadow="never" class="section-card story-closing-card">
         <p class="eyebrow">BAOZHAN / FINAL NOTE</p>
         <blockquote>{{ story.closing }}</blockquote>
+        <el-button type="danger" :icon="DocumentChecked" @click="fullStoryVisible = true">
+          查看完整故事
+        </el-button>
       </el-card>
+
+      <el-dialog
+        v-model="fullStoryVisible"
+        class="full-story-dialog"
+        title="第一章完整故事"
+        width="760px"
+        destroy-on-close
+      >
+        <div class="full-story-body">
+          <p
+            v-for="paragraph in story.fullStory"
+            :key="paragraph"
+          >
+            {{ paragraph }}
+          </p>
+        </div>
+        <template #footer>
+          <el-button @click="fullStoryVisible = false">关闭</el-button>
+          <el-button type="danger" @click="router.push('/locked')">
+            查看第二章占位
+          </el-button>
+        </template>
+      </el-dialog>
     </template>
   </section>
 </template>

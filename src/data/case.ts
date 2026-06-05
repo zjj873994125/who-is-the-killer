@@ -36,8 +36,24 @@ export interface ReplayQuestion {
   prompt: string;
   candidateEvidenceIds: string[];
   correctEvidenceIds: string[];
+  reasoningQuestions: ReplayReasoningQuestion[];
   successSummary: string;
   failureHint: string;
+}
+
+export interface ReplayReasoningQuestion {
+  id: string;
+  title: string;
+  prompt: string;
+  options: ReplayReasoningOption[];
+  correctOptionId: string;
+  successFeedback: string;
+  failureHint: string;
+}
+
+export interface ReplayReasoningOption {
+  id: string;
+  label: string;
 }
 
 export interface SceneObservationPoint {
@@ -139,6 +155,7 @@ export interface ChapterResolutionStory {
   subtitle: string;
   imageAlt: string;
   lead: string;
+  fullStory: string[];
   images: StoryImage[];
   beats: StoryBeat[];
   closing: string;
@@ -953,8 +970,122 @@ export const replayQuestions: Record<string, ReplayQuestion> = {
       'monitor-missing-frame',
       'floor-display-mark',
     ],
+    reasoningQuestions: [
+      {
+        id: 'time-window',
+        title: '时间矛盾',
+        prompt: '第一章里，真正需要被锁定的关键时间窗口是哪一段？',
+        options: [
+          {
+            id: 'manual-gap',
+            label: '00:11:33 到 00:12:05：控制柜状态、轿厢画面和楼层显示都在这一段发生变化。',
+          },
+          {
+            id: 'shift-start',
+            label: '00:09:58 到 00:10:30：机房门禁和夜班空岗先后出现，说明有人可能接近控制区域。',
+          },
+          {
+            id: 'morning-report',
+            label: '00:10 到 00:14：值班交接出现空窗，走廊证词也把异常声音放在这一段。',
+          },
+          {
+            id: 'rumor-days',
+            label: '前三晚到案发当晚：闹鬼传言连续发酵，九楼说法成为现场人员的共同预期。',
+          },
+        ],
+        correctOptionId: 'manual-gap',
+        successFeedback:
+          '正确。第一章要先抓住电梯进入手动检修的几十秒，而不是被传言时间线带走。',
+        failureHint:
+          '这题问的是能直接解释电梯异常运行的时间窗口，不是报案时间，也不是传言出现的时间。',
+      },
+      {
+        id: 'run-mode',
+        title: '运行模式',
+        prompt: '为什么“无人呼叫却停在 9F”不能按普通电梯运行解释？',
+        options: [
+          {
+            id: 'manual-mode',
+            label: '运行记录显示货梯短暂进入手动检修模式，外呼记录无法单独解释这段停靠。',
+          },
+          {
+            id: 'button-dirty',
+            label: '按钮面板有擦拭和混杂指纹，说明轿厢内按键记录可能被人为干扰。',
+          },
+          {
+            id: 'witness-scared',
+            label: '走廊证词提到先听见门响、后看见数字变化，异常可能来自门机动作顺序。',
+          },
+          {
+            id: 'floor-rumor',
+            label: '九楼传言让目击者优先注意 9F 显示，停靠判断可能受传言影响。',
+          },
+        ],
+        correctOptionId: 'manual-mode',
+        successFeedback:
+          '正确。手动检修模式改变了电梯运行逻辑，普通外呼记录已经不足以解释停靠。',
+        failureHint:
+          '不要先判断谁按了按钮。先判断电梯当时处在什么运行模式。',
+      },
+      {
+        id: 'monitor-gap',
+        title: '监控断帧',
+        prompt: '监控雪花最关键的矛盾是什么？',
+        options: [
+          {
+            id: 'inside-only',
+            label: '轿厢内画面连续雪花，但走廊镜头、配电支路和外部照明没有同步异常。',
+          },
+          {
+            id: 'all-black',
+            label: '断帧发生在控制柜状态变化之后，可能是检修模式导致监控系统短暂丢帧。',
+          },
+          {
+            id: 'camera-fell',
+            label: '轿厢摄像头没有脱落，说明画面异常更可能来自线路或信号链路。',
+          },
+          {
+            id: 'too-dark',
+            label: '走廊镜头保留了门外环境，缺失的只是轿厢内部最关键的 12 秒。',
+          },
+        ],
+        correctOptionId: 'inside-only',
+        successFeedback:
+          '正确。断帧集中在轿厢内部，普通断电解释不通。',
+        failureHint:
+          '关键不是“画面坏了”，而是坏的范围和其他系统记录对不上。',
+      },
+      {
+        id: 'chapter-conclusion',
+        title: '阶段结论',
+        prompt: '第一章结束时，玩家能成立的结论是什么？',
+        options: [
+          {
+            id: 'human-made-fear',
+            label: '现有证据无法支持普通故障或灵异解释，更像有人借设备异常和九楼传言制造恐惧。',
+          },
+          {
+            id: 'ghost-confirmed',
+            label: '现阶段应把重点放在九楼传言的来源，因为传言可能比设备记录更接近动机。',
+          },
+          {
+            id: 'killer-confirmed',
+            label: '现阶段应优先锁定公共权限卡的使用人，因为机房门禁是唯一接近控制柜的入口。',
+          },
+          {
+            id: 'accident-only',
+            label: '现阶段只能确认货梯存在多处异常，案件性质仍需等待尸检和门缝物证补强。',
+          },
+        ],
+        correctOptionId: 'human-made-fear',
+        successFeedback:
+          '正确。第一章只完成阶段性定调：排除鬼故事解释，把调查方向转向人为操作。',
+        failureHint:
+          '第一章还没有指认凶手，也不是证明鬼存在；它要完成的是案件性质定调。',
+      },
+    ],
     successSummary:
-      '复盘成立：电梯曾进入手动检修模式，轿厢内监控单独断帧，楼层显示存在干扰痕迹。所谓“无人操作的停靠”不能按普通运行记录解释。',
+      '复盘成立：核心证据筛选正确，推理链也闭合。电梯曾进入手动检修模式，轿厢内监控单独断帧，楼层显示存在干扰痕迹。所谓“无人操作的停靠”不能按普通运行记录解释。',
     failureHint:
       '证据组合还不能同时解释“运行模式、画面缺失、停靠楼层”三个矛盾。换一组能覆盖这三个方向的证据。',
   },
@@ -969,6 +1100,14 @@ export const chapterResolutionStories: Record<string, ChapterResolutionStory> = 
     imageAlt: '银港大厦货梯结案复盘图，包含电梯、9F 楼层显示、监控断帧和控制柜线索',
     lead:
       '复盘成立后，包斩把所有零散线索重新排进同一条时间线。所谓“有诡电梯”不是灵异事件，而是有人借传言、断帧和显示异常，把一次人为操作伪装成了电梯自己在深夜运行。',
+    fullStory: [
+      '你第一次接入特案组频道时，银港大厦的怪事已经传了三晚。B 座那部货梯总在午夜以后自己动，楼里的人说它会多停一层，说九楼不干净。包斩没有让你先相信任何人，他只把一份案情背景发进系统，让你记住：鬼故事可以制造恐惧，但不能解释机器记录。',
+      '第四晚，货梯门半开，死者倒在轿厢里。画龙先让你看现场，不要翻案卷。楼层显示停在 9F，数字边缘有新鲜划痕；按钮面板被擦过，B1 和 9F 附近指纹混杂；门缝里夹着深色纤维；轿厢摄像头没有脱落，却在关键时间连续雪花。每个点单独看都像是杂音，但放在一起，它们开始指向同一个问题：电梯不是在普通运行。',
+      '真正让案件转向的，是控制柜日志。00:11:33，货梯短暂进入手动检修模式，00:12:05 又恢复。这个时间段里，轿厢内监控断了 12 秒，走廊镜头、配电支路和外部照明却没有同步异常。如果是普通断电，断的不会只有轿厢内部；如果是普通外呼，控制柜不会出现检修状态。所谓无人呼叫的停靠，已经不能用正常电梯逻辑解释。',
+      '苏眉把注意力拉回尸体和门口。死者背向门，右手靠近侧壁扶手；门缝纤维的位置不像自然剐蹭；清洁剂气味、门外轮印和按钮擦拭痕说明现场被人接近和处理过。与此同时，机房门禁出现公共权限卡记录，当晚却没有维修工单。有人可能接近过控制柜，但第一章还不能直接指认是谁。',
+      '复盘到最后，包斩把九楼传言重新放回案板。传言不是答案，但它解释了为什么所有人都会先盯住 9F。楼层显示的缺亮和划痕，像是把目击者的视线固定在鬼故事上；监控断帧遮住了轿厢里最关键的 12 秒；手动检修模式则证明电梯在那段时间不是自己按规则行动。',
+      '所以第一章的结论不是“鬼不存在”这么简单，而是更危险的另一句话：有人知道楼里的人害怕什么，也知道怎样让电梯、监控和传言互相配合。你们暂时还没有凶手姓名，但已经把案件从灵异传闻里拉了出来。下一步要查的，是谁能拿到权限卡，谁在空岗时间接近机房，以及九楼传言最早是被谁喂进人群的。',
+    ],
     images: [
       {
         id: 'rumor-chat',
