@@ -1,0 +1,7 @@
+services:
+  haunted-elevator:
+    image: ${IMAGE}
+    container_name: ${CONTAINER_NAME:-haunted-elevator}
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-38080}:80"

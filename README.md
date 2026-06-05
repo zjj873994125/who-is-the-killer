@@ -51,6 +51,16 @@ npm run build
 - [通关线索文档](docs/walkthrough-clues.md)
 - [开发说明](docs/development.md)
 - [内容接入说明](docs/content-authoring.md)
+- [Docker 部署说明](docs/deployment.md)
+
+## Docker 部署
+
+项目提供 Docker + Nginx 的生产部署配置：
+
+- `Dockerfile`：多阶段构建，最终镜像使用 `nginx:1.27-alpine` 托管 `dist/`
+- `deploy/nginx.conf`：静态资源缓存和 SPA fallback
+- `deploy/docker-compose.yml`：服务器运行容器
+- `.github/workflows/deploy.yml`：构建、测试、推送 GHCR 镜像并远程部署
 
 ## 内容说明
 
