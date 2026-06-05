@@ -143,7 +143,7 @@ function getBriefing(evidence: Evidence) {
           </div>
         </section>
 
-        <section class="developer-import-panel" aria-label="开发工具">
+        <!-- <section class="developer-import-panel" aria-label="开发工具">
           <div>
             <strong>开发工具</strong>
             <span>跳过关键词检索，直接归档第一章全部线索。</span>
@@ -155,7 +155,7 @@ function getBriefing(evidence: Evidence) {
           >
             {{ hasArchivedAllFirstChapterClues ? '15 条线索已导入' : '一键导入全部线索' }}
           </el-button>
-        </section>
+        </section> -->
 
         <el-button
           class="clues-replay-button"
