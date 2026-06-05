@@ -80,8 +80,8 @@ function isPointInspected(point: SceneObservationPoint) {
         </div>
       </template>
 
-      <el-row :gutter="18">
-        <el-col :span="16">
+      <div class="survey-inspection-grid">
+        <section class="survey-scene-panel">
           <div class="scene-stage" aria-label="电梯现场模拟勘查">
             <div class="monitor-noise"></div>
             <img
@@ -110,9 +110,9 @@ function isPointInspected(point: SceneObservationPoint) {
               </span>
             </button>
           </div>
-        </el-col>
+        </section>
 
-        <el-col :span="8">
+        <aside class="survey-record-panel" aria-label="现场观察规则与记录">
           <el-space direction="vertical" alignment="stretch" :size="14" fill>
             <el-alert
               title="你现在只是在现场观察。正式证据需要根据观察内容去线索区检索归档。"
@@ -167,8 +167,8 @@ function isPointInspected(point: SceneObservationPoint) {
               去档案终端检索
             </el-button>
           </el-space>
-        </el-col>
-      </el-row>
+        </aside>
+      </div>
     </el-card>
 
     <el-dialog

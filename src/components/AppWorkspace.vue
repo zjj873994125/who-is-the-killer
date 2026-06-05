@@ -108,7 +108,7 @@ onUnmounted(() => {
 
 <template>
   <el-container ref="workspaceRef" class="workspace-shell">
-    <el-aside class="workspace-aside" width="clamp(280px, 24vw, 316px)">
+    <el-aside class="workspace-aside" width="clamp(248px, 22vw, 300px)">
       <div class="workspace-aside-body">
       <section class="workspace-brand">
         <span class="brand-mark">E-09</span>
