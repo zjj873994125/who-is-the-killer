@@ -352,7 +352,7 @@ describe('OfficialCaseView', () => {
     const wrapper = mountOfficialCase('officialChapterOneSurvey');
 
     expect(wrapper.find('.official-survey-scene-image').attributes('src')).toContain(
-      'official-chapter-1-survey-elevator-v7.png',
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-chapter-1-survey-elevator-v7.png',
     );
     expect(wrapper.findAll('.official-scene-hotspot').length).toBeGreaterThanOrEqual(7);
     expect(wrapper.find('.official-scene-hotspot .hotspot-dot').exists()).toBe(true);
@@ -564,7 +564,9 @@ describe('OfficialCaseView', () => {
       expect.arrayContaining([
         expect.stringContaining('official-prologue-03-floor41.png'),
         expect.stringContaining('wen-xiaowan-id-photo.png'),
-        expect.stringContaining('official-chapter-1-survey-elevator-v7.png'),
+        expect.stringContaining(
+          'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-chapter-1-survey-elevator-v7.png',
+        ),
         expect.stringContaining('story-cctv-control-room.png'),
       ]),
     );

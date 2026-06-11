@@ -12,6 +12,7 @@ export const imageAssets = {
   officialPrologue02Corridor: cosAssetUrl('official-prologue-02-corridor.png'),
   officialPrologue03Floor41: cosAssetUrl('official-prologue-03-floor41.png'),
   officialPrologue04Door: cosAssetUrl('official-prologue-04-door.png'),
+  officialChapterOneSurveyElevator: cosAssetUrl('official-chapter-1-survey-elevator-v7.png'),
   prologueCctvFrame: cosAssetUrl('prologue-cctv-frame.png'),
   squadAvatarsSprite: cosAssetUrl('squad-avatars-sprite.png'),
   storyCctvControlRoom: cosAssetUrl('story-cctv-control-room.png'),

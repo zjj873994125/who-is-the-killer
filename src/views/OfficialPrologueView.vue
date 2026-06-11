@@ -6,9 +6,9 @@ import { gsap } from 'gsap';
 import { officialPrologueBriefing } from '../data/officialCase';
 import { imageAssets } from '../utils/cosAssets';
 import { completeOfficialPrologue } from '../utils/officialProgress';
-import entrySceneUrl from '../assets/official-chapter-1-survey-elevator-v7.png';
 
 const router = useRouter();
+const entrySceneUrl = imageAssets.officialChapterOneSurveyElevator;
 const hasEnteredPrologue = ref(false);
 const isLoading = ref(false);
 const loadingProgress = ref(0);

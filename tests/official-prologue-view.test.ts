@@ -41,7 +41,7 @@ describe('OfficialPrologueView', () => {
 
     expect(wrapper.find('.official-prologue-entry-screen').exists()).toBe(true);
     expect(wrapper.find('.official-entry-scene-frame img').attributes('src')).toContain(
-      'official-chapter-1-survey-elevator-v7.png',
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-chapter-1-survey-elevator-v7.png',
     );
     expect(wrapper.find('.official-entry-scene-frame img').attributes('alt')).toBe(
       '案发货梯内部局部监控截帧',

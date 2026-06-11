@@ -24,8 +24,8 @@ import {
 import { officialChapterOneOriginalStory } from '../data/officialStoryText';
 import { imageAssets } from '../utils/cosAssets';
 import { getSquadAvatarStyle } from '../utils/squadAvatars';
-import surveyElevatorSceneUrl from '../assets/official-chapter-1-survey-elevator-v7.png';
 
+const surveyElevatorSceneUrl = imageAssets.officialChapterOneSurveyElevator;
 const reportElevatorImageUrl = imageAssets.officialPrologue03Floor41;
 const fieldInvestigationImageUrl = imageAssets.storyFieldInvestigation;
 const wenXiaowanPhotoUrl = imageAssets.wenXiaowanIdPhoto;

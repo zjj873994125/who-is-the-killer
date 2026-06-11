@@ -16,4 +16,10 @@ describe('cosAssets', () => {
       'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-prologue-03-floor41.png',
     );
   });
+
+  it('uses COS for the official chapter one elevator scene', () => {
+    expect(imageAssets.officialChapterOneSurveyElevator).toBe(
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-chapter-1-survey-elevator-v7.png',
+    );
+  });
 });
