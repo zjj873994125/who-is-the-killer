@@ -9,8 +9,10 @@ import {
   type SceneObservationPoint,
 } from '../data/case';
 import { useGameContext } from '../context/gameContext';
-import elevatorSceneUrl from '../assets/elevator-scene.png';
+import { imageAssets } from '../utils/cosAssets';
 import { getSquadAvatarStyle } from '../utils/squadAvatars';
+
+const elevatorSceneUrl = imageAssets.elevatorScene;
 
 const router = useRouter();
 const { state, discoverKeyword } = useGameContext();
@@ -73,7 +75,7 @@ function isPointInspected(point: SceneObservationPoint) {
             <el-tag effect="plain" type="danger">
               已观察 {{ inspectedPointCount }}/{{ sceneObservationPoints.length }}
             </el-tag>
-            <el-button :icon="Files" @click="router.push('/clues')">
+            <el-button :icon="Files" @click="router.push('/demo/clues')">
               打开档案检索
             </el-button>
           </el-space>
@@ -163,7 +165,7 @@ function isPointInspected(point: SceneObservationPoint) {
               </el-space>
             </el-card>
 
-            <el-button type="danger" :icon="Search" @click="router.push('/clues')">
+            <el-button type="danger" :icon="Search" @click="router.push('/demo/clues')">
               去档案终端检索
             </el-button>
           </el-space>
@@ -192,7 +194,7 @@ function isPointInspected(point: SceneObservationPoint) {
       </template>
       <template #footer>
         <el-button @click="activePoint = null">继续勘查</el-button>
-        <el-button type="danger" @click="router.push('/clues')">
+        <el-button type="danger" @click="router.push('/demo/clues')">
           去检索
         </el-button>
       </template>

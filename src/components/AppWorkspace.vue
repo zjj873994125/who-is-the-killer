@@ -25,42 +25,42 @@ const currentChapter = computed(() => chapterById[state.value.currentChapterId])
 
 const navItems = computed(() => [
   {
-    path: '/case',
+    path: '/demo/case',
     label: '案件区',
     desc: '立案与章节入口',
     icon: Document,
     disabled: false,
   },
   {
-    path: '/survey',
+    path: '/demo/survey',
     label: '勘查区',
     desc: '现场与监控证据',
     icon: Search,
     disabled: !state.value.unlockedChapterIds.includes('chapter-1'),
   },
   {
-    path: '/clues',
+    path: '/demo/clues',
     label: '线索区',
     desc: '自动归档证据',
     icon: Files,
     disabled: !state.value.unlockedChapterIds.includes('chapter-1'),
   },
   {
-    path: '/replay',
+    path: '/demo/replay',
     label: '复盘区',
     desc: '验证电梯矛盾',
     icon: Location,
     disabled: !state.value.unlockedChapterIds.includes('chapter-1'),
   },
   {
-    path: '/story',
+    path: '/demo/story',
     label: '故事区',
     desc: '结案复盘故事',
     icon: Reading,
     disabled: !state.value.solvedReplayQuestionIds.includes('replay-chapter-1'),
   },
   {
-    path: '/locked',
+    path: '/demo/locked',
     label: '后续档案',
     desc: '第二章占位',
     icon: Warning,

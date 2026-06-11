@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'vue';
-import squadAvatarsSpriteUrl from '../assets/squad-avatars-sprite.png';
+import { imageAssets } from './cosAssets';
+
+const squadAvatarsSpriteUrl = imageAssets.squadAvatarsSprite;
 
 const squadAvatarPositions: Record<string, string> = {
   baozhan: '0% 0%',

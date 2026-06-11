@@ -20,8 +20,10 @@ import {
   type PrologueBeat,
 } from '../data/case';
 import { useGameContext } from '../context/gameContext';
-import prologueCctvUrl from '../assets/prologue-cctv-frame.png';
+import { imageAssets } from '../utils/cosAssets';
 import { getSquadAvatarStyle } from '../utils/squadAvatars';
+
+const prologueCctvUrl = imageAssets.prologueCctvFrame;
 
 const router = useRouter();
 const { state, collectEvidence, advanceChapter } = useGameContext();
@@ -138,7 +140,7 @@ function syncBeat() {
 
 function enterSurvey() {
   advanceChapter('prologue');
-  void router.push('/survey');
+  void router.push('/demo/survey');
 }
 
 function isBeatSynced(beat: PrologueBeat) {

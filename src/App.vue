@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import AppWorkspace from './components/AppWorkspace.vue';
 import ContentWarning from './components/ContentWarning.vue';
 import { provideGameContext } from './context/gameContext';
@@ -19,15 +19,18 @@ import {
 } from './stores/gameState';
 
 const router = useRouter();
+const route = useRoute();
 const hasAcceptedWarning = ref(false);
 const state = ref<SaveState>(createInitialState());
 
 const showSystem = computed(() => hasAcceptedWarning.value);
+const isDemoRoute = computed(() => route.path.startsWith('/demo'));
+const shouldShowWarning = computed(() => !showSystem.value && isDemoRoute.value);
 
 function acceptWarning() {
   hasAcceptedWarning.value = true;
   localStorage.setItem('haunted-elevator-warning-accepted', 'true');
-  void router.replace('/case');
+  void router.replace('/demo/case');
 }
 
 function handleCollectEvidence(evidenceId: string) {
@@ -54,19 +57,24 @@ function handleReset() {
   state.value = clearPersistedState();
   hasAcceptedWarning.value = false;
   localStorage.removeItem('haunted-elevator-warning-accepted');
-  void router.replace('/case');
+  void router.replace('/demo/case');
 }
 
 function syncCurrentChapterFromRoute(path: string) {
-  if (path === '/case') {
+  if (path === '/demo/case') {
     state.value = setCurrentChapter(state.value, 'prologue');
   }
 
-  if (path === '/survey' || path === '/clues' || path === '/replay' || path === '/story') {
+  if (
+    path === '/demo/survey' ||
+    path === '/demo/clues' ||
+    path === '/demo/replay' ||
+    path === '/demo/story'
+  ) {
     state.value = setCurrentChapter(state.value, 'chapter-1');
   }
 
-  if (path === '/locked') {
+  if (path === '/demo/locked') {
     state.value = setCurrentChapter(state.value, 'chapter-2');
   }
 }
@@ -105,6 +113,7 @@ watch(
 </script>
 
 <template>
-  <ContentWarning v-if="!showSystem" @accept="acceptWarning" />
-  <AppWorkspace v-else />
+  <ContentWarning v-if="shouldShowWarning" @accept="acceptWarning" />
+  <AppWorkspace v-else-if="isDemoRoute" />
+  <router-view v-else />
 </template>

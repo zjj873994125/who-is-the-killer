@@ -6,45 +6,112 @@ import CluesView from './views/CluesView.vue';
 import ReplayView from './views/ReplayView.vue';
 import StoryView from './views/StoryView.vue';
 import LockedView from './views/LockedView.vue';
+import OfficialCaseView from './views/OfficialCaseView.vue';
+import OfficialPrologueView from './views/OfficialPrologueView.vue';
+import GameSelectView from './views/GameSelectView.vue';
+import { hasCompletedOfficialPrologue } from './utils/officialProgress';
 
 export const routes: RouteRecordRaw[] = [
   {
-    path: '/case',
+    path: '/',
+    name: 'gameSelect',
+    component: GameSelectView,
+  },
+  {
+    path: '/demo/case',
     name: 'case',
     component: CaseView,
   },
   {
-    path: '/survey',
+    path: '/demo/survey',
     name: 'survey',
     component: SurveyView,
   },
   {
-    path: '/clues',
+    path: '/demo/clues',
     name: 'clues',
     component: CluesView,
   },
   {
-    path: '/replay',
+    path: '/demo/replay',
     name: 'replay',
     component: ReplayView,
   },
   {
-    path: '/story',
+    path: '/demo/story',
     name: 'story',
     component: StoryView,
   },
   {
-    path: '/locked',
+    path: '/demo/locked',
     name: 'locked',
     component: LockedView,
   },
   {
-    path: '/',
-    redirect: '/case',
+    path: '/official/prologue',
+    name: 'officialPrologue',
+    component: OfficialPrologueView,
+  },
+  {
+    path: '/official/chapter-6',
+    redirect: '/official/prologue',
+  },
+  {
+    path: '/official/chapter-1',
+    redirect: '/official/chapter-1/case',
+  },
+  {
+    path: '/official/chapter-1/case',
+    name: 'officialChapterOneCase',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/official/chapter-1/messages',
+    name: 'officialChapterOneMessages',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/official/chapter-1/survey',
+    name: 'officialChapterOneSurvey',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/official/chapter-1/search',
+    name: 'officialChapterOneSearch',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/official/chapter-1/experiment',
+    redirect: '/official/chapter-1/messages',
+  },
+  {
+    path: '/official/chapter-1/replay',
+    name: 'officialChapterOneReplay',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/official/chapter-1/story',
+    name: 'officialChapterOneStory',
+    component: OfficialCaseView,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
   },
 ];
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to) => {
+  if (
+    to.path.startsWith('/official/chapter-1') &&
+    !hasCompletedOfficialPrologue()
+  ) {
+    return '/official/prologue';
+  }
+
+  return true;
 });

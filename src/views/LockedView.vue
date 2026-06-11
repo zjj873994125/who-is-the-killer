@@ -13,7 +13,7 @@ const router = useRouter();
         sub-title="第一章闭环完成。这里将接入授权章节梗概、传闻对照和第二章证据链。"
       >
         <template #extra>
-          <el-button @click="router.push('/case')">返回案件区</el-button>
+          <el-button @click="router.push('/demo/case')">返回案件区</el-button>
         </template>
       </el-result>
     </el-card>

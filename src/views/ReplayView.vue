@@ -45,7 +45,7 @@ const ready = computed(() =>
         :closable="false"
       >
         <template #default>
-          <el-button size="small" @click="router.push('/clues')">
+          <el-button size="small" @click="router.push('/demo/clues')">
             返回线索区
           </el-button>
         </template>
@@ -82,7 +82,7 @@ const ready = computed(() =>
         sub-title="故事区已解锁。去故事区查看第一章完整结案故事。"
       >
         <template #extra>
-          <el-button type="danger" @click="router.push('/story')">
+          <el-button type="danger" @click="router.push('/demo/story')">
             进入故事区
           </el-button>
         </template>

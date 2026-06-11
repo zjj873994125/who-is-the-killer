@@ -7,12 +7,9 @@ import {
   evidences,
 } from '../data/case';
 import { useGameContext } from '../context/gameContext';
-import chapterOneResolutionUrl from '../assets/chapter-one-resolution.png';
-import storyRumorChatUrl from '../assets/story-rumor-chat.png';
-import storyFieldInvestigationUrl from '../assets/story-field-investigation.png';
-import storyCctvControlRoomUrl from '../assets/story-cctv-control-room.png';
-import storyEvidenceTableUrl from '../assets/story-evidence-table.png';
-import storyTeamResolutionUrl from '../assets/story-team-resolution.png';
+import { imageAssets } from '../utils/cosAssets';
+
+const chapterOneResolutionUrl = imageAssets.chapterOneResolution;
 
 const router = useRouter();
 const { state } = useGameContext();
@@ -24,11 +21,11 @@ const hasSolvedChapterOne = computed(() =>
 );
 
 const storyImageUrls: Record<string, string> = {
-  'rumor-chat': storyRumorChatUrl,
-  'field-investigation': storyFieldInvestigationUrl,
-  'cctv-control': storyCctvControlRoomUrl,
-  'evidence-table': storyEvidenceTableUrl,
-  'team-resolution': storyTeamResolutionUrl,
+  'rumor-chat': imageAssets.storyRumorChat,
+  'field-investigation': imageAssets.storyFieldInvestigation,
+  'cctv-control': imageAssets.storyCctvControlRoom,
+  'evidence-table': imageAssets.storyEvidenceTable,
+  'team-resolution': imageAssets.storyTeamResolution,
 };
 
 function evidenceTitles(evidenceIds: string[]) {
@@ -47,7 +44,7 @@ function evidenceTitles(evidenceIds: string[]) {
         sub-title="完成第一章复盘后，系统会生成完整的结案故事和图片卷宗。"
       >
         <template #extra>
-          <el-button type="danger" :icon="Location" @click="router.push('/replay')">
+          <el-button type="danger" :icon="Location" @click="router.push('/demo/replay')">
             前往复盘区
           </el-button>
         </template>
@@ -61,7 +58,7 @@ function evidenceTitles(evidenceIds: string[]) {
             <p class="eyebrow">{{ story.subtitle }}</p>
             <h2>{{ story.title }}</h2>
             <p>{{ story.lead }}</p>
-            <el-button type="danger" :icon="DocumentChecked" @click="router.push('/locked')">
+            <el-button type="danger" :icon="DocumentChecked" @click="router.push('/demo/locked')">
               解锁第二章档案
             </el-button>
           </div>
@@ -157,7 +154,7 @@ function evidenceTitles(evidenceIds: string[]) {
         </div>
         <template #footer>
           <el-button @click="fullStoryVisible = false">关闭</el-button>
-          <el-button type="danger" @click="router.push('/locked')">
+          <el-button type="danger" @click="router.push('/demo/locked')">
             查看第二章占位
           </el-button>
         </template>

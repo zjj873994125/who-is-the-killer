@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { gsap } from 'gsap';
-import prologueCctvUrl from '../assets/prologue-cctv-frame.png';
+import { imageAssets } from '../utils/cosAssets';
+
+const prologueCctvUrl = imageAssets.prologueCctvFrame;
 
 const emit = defineEmits<{
   accept: [];

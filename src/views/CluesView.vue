@@ -161,7 +161,7 @@ function getBriefing(evidence: Evidence) {
           class="clues-replay-button"
           type="danger"
           :icon="Location"
-          @click="router.push('/replay')"
+          @click="router.push('/demo/replay')"
         >
           去复盘区验证
         </el-button>
