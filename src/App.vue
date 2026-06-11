@@ -21,7 +21,9 @@ import {
 const router = useRouter();
 const route = useRoute();
 const hasAcceptedWarning = ref(false);
+const isCleanMode = ref(false);
 const state = ref<SaveState>(createInitialState());
+const CLEAN_MODE_KEY = 'haunted-elevator-clean-mode';
 
 const showSystem = computed(() => hasAcceptedWarning.value);
 const isDemoRoute = computed(() => route.path.startsWith('/demo'));
@@ -31,6 +33,11 @@ function acceptWarning() {
   hasAcceptedWarning.value = true;
   localStorage.setItem('haunted-elevator-warning-accepted', 'true');
   void router.replace('/demo/case');
+}
+
+function toggleCleanMode() {
+  isCleanMode.value = !isCleanMode.value;
+  localStorage.setItem(CLEAN_MODE_KEY, isCleanMode.value ? 'true' : 'false');
 }
 
 function handleCollectEvidence(evidenceId: string) {
@@ -93,6 +100,7 @@ onMounted(() => {
   state.value = loadState();
   hasAcceptedWarning.value =
     localStorage.getItem('haunted-elevator-warning-accepted') === 'true';
+  isCleanMode.value = localStorage.getItem(CLEAN_MODE_KEY) === 'true';
   syncCurrentChapterFromRoute(router.currentRoute.value.path);
 });
 
@@ -113,7 +121,17 @@ watch(
 </script>
 
 <template>
-  <ContentWarning v-if="shouldShowWarning" @accept="acceptWarning" />
-  <AppWorkspace v-else-if="isDemoRoute" />
-  <router-view v-else />
+  <div class="app-root" :class="{ 'clean-mode': isCleanMode }">
+    <button
+      class="clean-mode-toggle"
+      type="button"
+      :aria-pressed="isCleanMode"
+      @click="toggleCleanMode"
+    >
+      {{ isCleanMode ? '图片隐藏' : '纯净模式' }}
+    </button>
+    <ContentWarning v-if="shouldShowWarning" @accept="acceptWarning" />
+    <AppWorkspace v-else-if="isDemoRoute" />
+    <router-view v-else />
+  </div>
 </template>

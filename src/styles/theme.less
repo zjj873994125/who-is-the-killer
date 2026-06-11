@@ -44,6 +44,126 @@ body {
   min-height: 0;
 }
 
+.app-root {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.clean-mode-toggle {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  z-index: 1000;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(105, 119, 131, 0.34);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #5f6d78;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(31, 41, 51, 0.08);
+
+  &:hover {
+    border-color: rgba(180, 35, 42, 0.34);
+    color: var(--case-danger);
+  }
+}
+
+.clean-mode {
+  .entry-monitor-frame,
+  .official-prologue-story-frame,
+  .story-visual,
+  .story-gallery-item,
+  .official-report-card,
+  .official-case-image-card,
+  .official-victim-body,
+  .official-elevator-door,
+  .scene-stage,
+  .mini-monitor {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        -28deg,
+        transparent 0 42px,
+        rgba(105, 119, 131, 0.08) 42px 43px,
+        transparent 43px 84px
+      ),
+      linear-gradient(rgba(31, 41, 51, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31, 41, 51, 0.035) 1px, transparent 1px),
+      #f6f8fa !important;
+    background-size: 26px 26px !important;
+  }
+
+  .entry-monitor-frame img,
+  .official-prologue-story-frame > img,
+  .story-visual > img,
+  .story-gallery-item > img,
+  .official-report-card > img,
+  .official-case-image,
+  .official-victim-photo,
+  .official-survey-scene-image,
+  .scene-background,
+  .cctv-preview-image {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .entry-monitor-frame::after,
+  .official-prologue-story-frame::after,
+  .story-visual::after,
+  .story-gallery-item::after,
+  .official-report-card::after,
+  .official-case-image-card::after,
+  .official-victim-body::after,
+  .official-elevator-door::after,
+  .scene-stage::after,
+  .mini-monitor::after {
+    content: "内部资料预览\a WORKSPACE VIEW";
+    position: absolute;
+    inset: 14px;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    border: 1px dashed rgba(105, 119, 131, 0.34);
+    border-radius: 8px;
+    color: #7a8791;
+    white-space: pre;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.8;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .official-elevator-door::after,
+  .scene-stage::after {
+    z-index: 1;
+  }
+
+  .official-prologue-caption,
+  .story-gallery-item figcaption,
+  .official-report-card > div,
+  .official-victim-body dl {
+    position: relative;
+    z-index: 5;
+  }
+
+  .official-scene-hotspot,
+  .scene-hotspot {
+    z-index: 5;
+  }
+
+  .entry-scan-line,
+  .entry-floor-number,
+  .monitor-noise,
+  .cctv-static-burst {
+    display: none;
+  }
+}
+
 button {
   font: inherit;
 }
