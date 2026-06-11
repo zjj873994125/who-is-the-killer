@@ -21,5 +21,7 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
-docs
+docs/*
+!docs/原文/
+!docs/原文/**
 tests
