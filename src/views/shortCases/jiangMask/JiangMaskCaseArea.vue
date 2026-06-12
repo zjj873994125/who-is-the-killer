@@ -165,7 +165,7 @@ const jiangMaskEvidenceImage = imageAssets.jiangMaskEvidence;
   margin: 10px 0 0;
 }
 
-.victim-file div {
+.victim-file dl > div {
   display: grid;
   grid-template-columns: 78px minmax(0, 1fr);
   gap: 10px;
@@ -322,6 +322,7 @@ const jiangMaskEvidenceImage = imageAssets.jiangMaskEvidence;
 }
 
 .id-card-photo-frame {
+  z-index: 1;
   width: 86px;
   aspect-ratio: 0.78;
   position: relative;
@@ -330,6 +331,7 @@ const jiangMaskEvidenceImage = imageAssets.jiangMaskEvidence;
 .id-card-photo {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   display: block;
@@ -345,6 +347,7 @@ const jiangMaskEvidenceImage = imageAssets.jiangMaskEvidence;
 .id-card-placeholder {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: none;
   place-items: center;
   border: 1px dashed rgba(105, 119, 131, 0.34);
