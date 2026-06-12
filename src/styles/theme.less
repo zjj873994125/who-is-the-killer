@@ -162,6 +162,42 @@ body {
   .cctv-static-burst {
     display: none;
   }
+
+  .jiang-case-area .mask-image,
+  .jiang-case-area .id-card-photo,
+  .jiang-survey-area .stage-scene-image {
+    display: none;
+  }
+
+  .jiang-case-area .mask-placeholder,
+  .jiang-case-area .id-card-placeholder {
+    display: grid;
+  }
+
+  .jiang-survey-area .stage-fallback-scene {
+    display: block;
+  }
+
+  .jiang-case-area .mask-evidence {
+    background:
+      repeating-linear-gradient(
+        -28deg,
+        transparent 0 42px,
+        rgba(105, 119, 131, 0.08) 42px 43px,
+        transparent 43px 84px
+      ),
+      linear-gradient(rgba(31, 41, 51, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31, 41, 51, 0.035) 1px, transparent 1px),
+      #f6f8fa;
+    background-size: 26px 26px;
+  }
+
+  .jiang-case-area .mask-evidence h3,
+  .jiang-case-area .mask-evidence p,
+  .jiang-case-area .mask-evidence .eyebrow,
+  .jiang-case-area .mask-image-pair figcaption {
+    color: #5f6b76;
+  }
 }
 
 button {

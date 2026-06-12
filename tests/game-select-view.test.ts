@@ -28,7 +28,7 @@ describe('GameSelectView', () => {
     });
 
     expect(wrapper.find('#formal-chapter-list').exists()).toBe(false);
-    expect(wrapper.findAll('.game-series-card')).toHaveLength(2);
+    expect(wrapper.findAll('.game-series-card')).toHaveLength(3);
 
     const expandButton = wrapper
       .findAll('button')
@@ -91,5 +91,29 @@ describe('GameSelectView', () => {
     await chapterOneButton?.trigger('click');
 
     expect(push).toHaveBeenCalledWith('/official/chapter-1/case');
+  });
+
+  it('opens the Jiang Mask short case from the short case collection', async () => {
+    const wrapper = mount(GameSelectView, {
+      global: {
+        stubs: {
+          ElIcon: {
+            template: '<span><slot /></span>',
+          },
+        },
+      },
+    });
+
+    const expandButton = wrapper
+      .findAll('button')
+      .find((button) => button.text().includes('选择短篇案件'));
+    await expandButton?.trigger('click');
+
+    const jiangButton = wrapper
+      .findAll('.formal-chapter-row')
+      .find((button) => button.text().includes('姜面不落地'));
+    await jiangButton?.trigger('click');
+
+    expect(push).toHaveBeenCalledWith('/short/jiang-mask/case');
   });
 });

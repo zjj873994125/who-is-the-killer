@@ -22,4 +22,19 @@ describe('cosAssets', () => {
       'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/official-chapter-1-survey-elevator-v7.png',
     );
   });
+
+  it('uses COS for Jiang Mask short-case images', () => {
+    expect(imageAssets.heJingshanId).toBe(
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/he-jingshan-id.png',
+    );
+    expect(imageAssets.jiangMaskEvidence).toBe(
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/jiang-mask-evidence.png',
+    );
+    expect(imageAssets.jiangMaskBackEvidence).toBe(
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/jiang-mask-back-evidence.png',
+    );
+    expect(imageAssets.jiangMaskSurveyStage).toBe(
+      'https://who-is-killer-1323666988.cos.ap-shanghai.myqcloud.com/jiang-mask-survey-stage.png',
+    );
+  });
 });

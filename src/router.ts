@@ -9,6 +9,7 @@ import LockedView from './views/LockedView.vue';
 import OfficialCaseView from './views/OfficialCaseView.vue';
 import OfficialPrologueView from './views/OfficialPrologueView.vue';
 import GameSelectView from './views/GameSelectView.vue';
+import JiangMaskCaseView from './views/shortCases/JiangMaskCaseView.vue';
 import { hasCompletedOfficialPrologue } from './utils/officialProgress';
 
 export const routes: RouteRecordRaw[] = [
@@ -93,6 +94,15 @@ export const routes: RouteRecordRaw[] = [
     path: '/official/chapter-1/story',
     name: 'officialChapterOneStory',
     component: OfficialCaseView,
+  },
+  {
+    path: '/short/jiang-mask',
+    redirect: '/short/jiang-mask/case',
+  },
+  {
+    path: '/short/jiang-mask/:area(case|survey|search|replay|story)',
+    name: 'shortJiangMaskCase',
+    component: JiangMaskCaseView,
   },
   {
     path: '/:pathMatch(.*)*',

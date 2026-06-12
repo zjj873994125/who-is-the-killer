@@ -24,6 +24,7 @@ describe('router', () => {
       'officialChapterOneSearch',
       'officialChapterOneReplay',
       'officialChapterOneStory',
+      'shortJiangMaskCase',
     ]);
 
     expect(namedRoutes.map((route) => route.path)).toEqual([
@@ -41,6 +42,7 @@ describe('router', () => {
       '/official/chapter-1/search',
       '/official/chapter-1/replay',
       '/official/chapter-1/story',
+      '/short/jiang-mask/:area(case|survey|search|replay|story)',
     ]);
   });
 
@@ -55,6 +57,14 @@ describe('router', () => {
 
     expect(experimentRoute?.redirect).toBe('/official/chapter-1/messages');
     expect(experimentRoute?.name).toBeUndefined();
+  });
+
+  it('adds the new short case without changing demo or formal chapter routes', () => {
+    const shortRedirect = routes.find((route) => route.path === '/short/jiang-mask');
+    const shortRoute = routes.find((route) => route.name === 'shortJiangMaskCase');
+
+    expect(shortRedirect?.redirect).toBe('/short/jiang-mask/case');
+    expect(shortRoute?.path).toBe('/short/jiang-mask/:area(case|survey|search|replay|story)');
   });
 
   it('requires completing the formal prologue before direct chapter one routes', async () => {

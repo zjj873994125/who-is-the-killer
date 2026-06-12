@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ArrowDown, ArrowRight, ArrowUp, Document, Lock, Reading } from '@element-plus/icons-vue';
+import { ArrowDown, ArrowRight, ArrowUp, Document, Lock, Reading, Tickets } from '@element-plus/icons-vue';
 import { officialChapters, officialPrologueBriefing } from '../data/officialCase';
 import { hasCompletedOfficialPrologue } from '../utils/officialProgress';
 
 const router = useRouter();
 const isFormalExpanded = ref(false);
 const hasFinishedFormalPrologue = ref(hasCompletedOfficialPrologue());
+const isShortExpanded = ref(false);
 
 const officialGameCards = officialChapters
   .map((chapter) => {
@@ -123,6 +124,57 @@ const officialGameCards = officialChapters
               <ArrowRight v-else />
             </el-icon>
           </button>
+          </div>
+        </Transition>
+      </article>
+
+      <article class="game-series-card short-series">
+        <div class="game-series-header">
+          <span class="game-entry-icon">
+            <el-icon><Tickets /></el-icon>
+          </span>
+          <span>
+            <small>SHORT CASES</small>
+            <strong>短篇合集</strong>
+          </span>
+        </div>
+        <p>
+          新短篇将使用通用破案流程框架，每个案件仍可定制案件区、通讯区、勘查区和故事区样式。
+        </p>
+
+        <button
+          class="game-series-action"
+          type="button"
+          :aria-expanded="isShortExpanded"
+          aria-controls="short-case-list"
+          @click="isShortExpanded = !isShortExpanded"
+        >
+          选择短篇案件
+          <el-icon>
+            <ArrowUp v-if="isShortExpanded" />
+            <ArrowDown v-else />
+          </el-icon>
+        </button>
+
+        <Transition name="formal-chapter-expand">
+          <div
+            v-if="isShortExpanded"
+            id="short-case-list"
+            class="formal-chapter-list"
+            aria-label="短篇案件"
+          >
+            <button
+              class="formal-chapter-row"
+              type="button"
+              @click="router.push('/short/jiang-mask/case')"
+            >
+              <span class="formal-chapter-index">短篇</span>
+              <span>
+                <strong>姜面不落地</strong>
+                <small>百溪镇冬祭后台，黑姜面、红绳和旧火灾串起第一桩短篇案。</small>
+              </span>
+              <el-icon><ArrowRight /></el-icon>
+            </button>
           </div>
         </Transition>
       </article>
